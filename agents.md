@@ -22,6 +22,7 @@ Each lesson has its own directory under `lessons/`. New topics are added here as
 |---|-------|-----------|--------------|
 | 01 | Django → Go/Gin: What Actually Bites You | [`lessons/01-django-to-go-gaps/`](lessons/01-django-to-go-gaps/README.md) | Errors are values · no ORM sync · real goroutines · no settings.py |
 | 02 | Dependency Injection Without a Framework | [`lessons/02-dependency-injection/`](lessons/02-dependency-injection/README.md) | Config→Repo→Service→Handler chain · interface for testability · never use package globals |
+| 03 | ozzo-validation: Custom Rules, Nested Structs, RFC 9457 | [`lessons/03-ozzo-validation/`](lessons/03-ozzo-validation/README.md) | Bind then validate (two steps) · custom Rule interface · pointer = optional nested · flattenErrors for RFC 9457 |
 
 ---
 
@@ -29,8 +30,7 @@ Each lesson has its own directory under `lessons/`. New topics are added here as
 
 Suggested deep-dives based on your stack and where Go seniors invest their attention:
 
-1. **ozzo-validation patterns** — custom validators, nested struct validation, mapping validation errors to your RFC 9457 `extensions` field cleanly.
-3. **pgx transaction patterns** — `BEGIN` / `ROLLBACK` in Gin handlers without boilerplate; the `func(tx pgx.Tx) error` closure pattern.
+1. **pgx transaction patterns** — `BEGIN` / `ROLLBACK` in Gin handlers without boilerplate; the `func(tx pgx.Tx) error` closure pattern.
 4. **Structured logging with slog** — replacing fmt.Println with Go 1.21 `log/slog`, attaching `request_id` to every log line via context.
 5. **Interface-based testing** — defining repo interfaces so handlers are testable without a real DB; the `fakeRepo` pattern seniors use instead of mocks.
 6. **Context propagation** — what `c.Request.Context()` is, why you pass it to every DB call, and how it enables graceful shutdown and timeout cancellation.
