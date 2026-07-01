@@ -20,6 +20,7 @@ Each lesson has its own directory under `lessons/`. New topics are added here as
 
 | # | Topic | Directory | Key Takeaway |
 |---|-------|-----------|--------------|
+| 00 | Go Syntax Cheat Sheet | [`lessons/00-go-syntax-cheatsheet/`](lessons/00-go-syntax-cheatsheet/README.md) | Reference doc, not a lesson · come back here whenever you forget syntax |
 | 01 | Django → Go/Gin: What Actually Bites You | [`lessons/01-django-to-go-gaps/`](lessons/01-django-to-go-gaps/README.md) | Errors are values · no ORM sync · real goroutines · no settings.py |
 | 02 | Dependency Injection Without a Framework | [`lessons/02-dependency-injection/`](lessons/02-dependency-injection/README.md) | Config→Repo→Service→Handler chain · interface for testability · never use package globals |
 | 03 | ozzo-validation: Custom Rules, Nested Structs, RFC 9457 | [`lessons/03-ozzo-validation/`](lessons/03-ozzo-validation/README.md) | Bind then validate (two steps) · custom Rule interface · pointer = optional nested · flattenErrors for RFC 9457 |
