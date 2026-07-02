@@ -25,6 +25,7 @@ Each lesson has its own directory under `lessons/`. New topics are added here as
 | 02 | Dependency Injection Without a Framework | [`lessons/02-dependency-injection/`](lessons/02-dependency-injection/README.md) | Config→Repo→Service→Handler chain · interface for testability · never use package globals |
 | 03 | ozzo-validation: Custom Rules, Nested Structs, RFC 9457 | [`lessons/03-ozzo-validation/`](lessons/03-ozzo-validation/README.md) | Bind then validate (two steps) · custom Rule interface · pointer = optional nested · flattenErrors for RFC 9457 |
 | 04 | pgx Transaction Patterns | [`lessons/04-pgx-transactions/`](lessons/04-pgx-transactions/README.md) | `WithTx` closure · `defer Rollback` is always safe · `Querier` interface for pool/tx polymorphism · passing tx explicitly (no thread-local) |
+| 05 | Structured Logging with slog | [`lessons/05-structured-logging/`](lessons/05-structured-logging/README.md) | `log/slog` ignores ctx unless you wrap the `Handler` · custom `contextHandler` injects `request_id` · package-level `slog.Info` bypasses ctx entirely — always use `*Context` variants |
 
 ---
 
@@ -32,7 +33,6 @@ Each lesson has its own directory under `lessons/`. New topics are added here as
 
 Suggested deep-dives based on your stack and where Go seniors invest their attention:
 
-4. **Structured logging with slog** — replacing fmt.Println with Go 1.21 `log/slog`, attaching `request_id` to every log line via context.
 5. **Interface-based testing** — defining repo interfaces so handlers are testable without a real DB; the `fakeRepo` pattern seniors use instead of mocks.
 6. **Context propagation** — what `c.Request.Context()` is, why you pass it to every DB call, and how it enables graceful shutdown and timeout cancellation.
 7. **Graceful shutdown** — `signal.NotifyContext` + `srv.Shutdown()` so in-flight requests finish before the process exits.
