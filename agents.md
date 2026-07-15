@@ -27,6 +27,7 @@ Each lesson has its own directory under `lessons/`. New topics are added here as
 | 04 | pgx Transaction Patterns | [`lessons/04-pgx-transactions/`](lessons/04-pgx-transactions/README.md) | `WithTx` closure · `defer Rollback` is always safe · `Querier` interface for pool/tx polymorphism · passing tx explicitly (no thread-local) |
 | 05 | Structured Logging with slog | [`lessons/05-structured-logging/`](lessons/05-structured-logging/README.md) | `log/slog` ignores ctx unless you wrap the `Handler` · custom `contextHandler` injects `request_id` · package-level `slog.Info` bypasses ctx entirely — always use `*Context` variants |
 | 06 | Interface-Based Testing | [`lessons/06-interface-testing/`](lessons/06-interface-testing/README.md) | `fakeRepo` (real map-backed implementation) replaces `unittest.mock.patch` · table-driven tests replace `pytest.mark.parametrize` · fresh fake per subtest — no automatic transaction rollback like Django's `TestCase` · `httptest` + real `gin.Engine` replaces `APITestCase` |
+| 07 | Context Propagation | [`lessons/07-context-propagation/`](lessons/07-context-propagation/README.md) | `ctx` is a live cancellation signal, not a data bag · must be passed explicitly through every layer or the chain silently breaks · `context.WithTimeout` only tightens, never loosens · `context.WithoutCancel` (not `Background()`) for fire-and-forget work that must outlive the request |
 
 ---
 
@@ -34,7 +35,6 @@ Each lesson has its own directory under `lessons/`. New topics are added here as
 
 Suggested deep-dives based on your stack and where Go seniors invest their attention:
 
-6. **Context propagation** — what `c.Request.Context()` is, why you pass it to every DB call, and how it enables graceful shutdown and timeout cancellation.
 7. **Graceful shutdown** — `signal.NotifyContext` + `srv.Shutdown()` so in-flight requests finish before the process exits.
 8. **Go module layout for a production API** — the `internal/` convention, why `cmd/api/main.go` is tiny, and how to split handlers / services / repos without circular imports.
 
