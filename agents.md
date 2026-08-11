@@ -29,6 +29,7 @@ Each lesson has its own directory under `lessons/`. New topics are added here as
 | 06 | Interface-Based Testing | [`lessons/06-interface-testing/`](lessons/06-interface-testing/README.md) | `fakeRepo` (real map-backed implementation) replaces `unittest.mock.patch` · table-driven tests replace `pytest.mark.parametrize` · fresh fake per subtest — no automatic transaction rollback like Django's `TestCase` · `httptest` + real `gin.Engine` replaces `APITestCase` |
 | 07 | Context Propagation | [`lessons/07-context-propagation/`](lessons/07-context-propagation/README.md) | `ctx` is a live cancellation signal, not a data bag · must be passed explicitly through every layer or the chain silently breaks · `context.WithTimeout` only tightens, never loosens · `context.WithoutCancel` (not `Background()`) for fire-and-forget work that must outlive the request |
 | 08 | Graceful Shutdown | [`lessons/08-graceful-shutdown/`](lessons/08-graceful-shutdown/README.md) | You are gunicorn now · `signal.NotifyContext` catches SIGTERM · `srv.Shutdown` needs a FRESH deadline ctx, never the already-canceled signal ctx · `http.ErrServerClosed` is success, not an error · teardown in reverse startup order: drain → workers → pool |
+| 09 | Module Layout for a Production API | [`lessons/09-module-layout/`](lessons/09-module-layout/README.md) | `internal/` is compiler-enforced, not just convention · dependency arrows point one way: domain → repository → service → handler → main · `go build` refuses import cycles outright — no Python-style lazy-import escape hatch · `cmd/api/main.go` is tiny because it's the only package allowed to see every layer |
 
 ---
 
@@ -36,7 +37,6 @@ Each lesson has its own directory under `lessons/`. New topics are added here as
 
 Suggested deep-dives based on your stack and where Go seniors invest their attention:
 
-8. **Go module layout for a production API** — the `internal/` convention, why `cmd/api/main.go` is tiny, and how to split handlers / services / repos without circular imports.
 9. **Middleware patterns in Gin** — what replaces Django middleware classes: `HandlerFunc` chains, `c.Next()`/`c.Abort()`, and writing auth/recovery/timeout middleware that respects `ctx`.
 
 ---
