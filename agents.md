@@ -30,6 +30,7 @@ Each lesson has its own directory under `lessons/`. New topics are added here as
 | 07 | Context Propagation | [`lessons/07-context-propagation/`](lessons/07-context-propagation/README.md) | `ctx` is a live cancellation signal, not a data bag · must be passed explicitly through every layer or the chain silently breaks · `context.WithTimeout` only tightens, never loosens · `context.WithoutCancel` (not `Background()`) for fire-and-forget work that must outlive the request |
 | 08 | Graceful Shutdown | [`lessons/08-graceful-shutdown/`](lessons/08-graceful-shutdown/README.md) | You are gunicorn now · `signal.NotifyContext` catches SIGTERM · `srv.Shutdown` needs a FRESH deadline ctx, never the already-canceled signal ctx · `http.ErrServerClosed` is success, not an error · teardown in reverse startup order: drain → workers → pool |
 | 09 | Module Layout for a Production API | [`lessons/09-module-layout/`](lessons/09-module-layout/README.md) | `internal/` is compiler-enforced, not just convention · dependency arrows point one way: domain → repository → service → handler → main · `go build` refuses import cycles outright — no Python-style lazy-import escape hatch · `cmd/api/main.go` is tiny because it's the only package allowed to see every layer |
+| 10 | Middleware Patterns in Gin | [`lessons/10-gin-middleware/`](lessons/10-gin-middleware/README.md) | Middleware is an ordered `HandlerFunc` chain · `c.Next()` continues · `c.Abort()` still needs `return` · timeouts work through cooperative context cancellation · reuse Gin recovery |
 
 ---
 
@@ -37,7 +38,7 @@ Each lesson has its own directory under `lessons/`. New topics are added here as
 
 Suggested deep-dives based on your stack and where Go seniors invest their attention:
 
-9. **Middleware patterns in Gin** — what replaces Django middleware classes: `HandlerFunc` chains, `c.Next()`/`c.Abort()`, and writing auth/recovery/timeout middleware that respects `ctx`.
+11. **Concurrency Patterns for API Services** — bounded goroutines, `errgroup`, worker pools, and avoiding goroutine leaks when requests are canceled.
 
 ---
 
